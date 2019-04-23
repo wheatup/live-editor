@@ -1,0 +1,26 @@
+html {
+	font-size: 62.5%;
+	body {
+		font-size: 1.6em;
+		margin: 0;
+		padding: 0;
+	}
+}
+
+.live-editor {
+	* {
+		&,
+		&::before,
+		&::after {
+			font: inherit;
+		}
+	}
+
+	a {
+		&,
+		&:link,
+		&:visited {
+			text-decoration: none;
+		}
+	}
+}

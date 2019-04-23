@@ -1,0 +1,11 @@
+{
+	"common": {
+		"wip": "敬请期待"
+	},
+	"tool": {
+		"add_text": "插入文字",
+		"add_image": "插入图片",
+		"add_shape": "插入形状",
+		"insert_text": "请插入文字"
+	}
+}

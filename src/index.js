@@ -1,12 +1,17 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import './index.css';
-import App from './App';
-import * as serviceWorker from './serviceWorker';
+import './scss/style.scss';
+import App from './app';
+import config from './core/config';
+import i18n from './core/i18n';
 
-ReactDOM.render(<App />, document.getElementById('root'));
+async function start(){
+	await config.init();
+	await i18n.init();
+	const root = document.createElement('div');
+	root.classList.add('live-editor');
+	document.body.appendChild(root);
+	ReactDOM.render(<App />, root);
+}
 
-// If you want your app to work offline and load faster, you can change
-// unregister() to register() below. Note this comes with some pitfalls.
-// Learn more about service workers: https://bit.ly/CRA-PWA
-serviceWorker.unregister();
+start();

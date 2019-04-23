@@ -1,0 +1,41 @@
+import React, { Component } from 'react';
+import ToolButton from './toolButton';
+import whevent from 'whevent';
+
+import { i18n } from '../core/i18n';
+import globalState from '../core/globalState';
+
+export default class Toolbar extends Component {
+
+	state = {
+		currentTool: null
+	}
+
+	componentDidMount() {
+		whevent.bind('SELECT_TOOL', ({ tool, text }) => {
+			globalState.currentTool = tool;
+			if (globalState.currentTool) {
+				whevent.call('TIP', { text });
+			}
+			this.setState({ currentTool: globalState.currentTool })
+		}, this);
+	}
+
+	onClickTool({ tool, text }) {
+		globalState.currentTool = globalState.currentTool === tool ? null : tool;
+		if (globalState.currentTool) {
+			whevent.call('TIP', { text });
+		}
+		this.setState({ currentTool: globalState.currentTool })
+	}
+
+	render() {
+		return (
+			<section className="toolbar">
+				<ToolButton active={this.state.currentTool === 'TEXT'} icon="icon-text-color" onClick={() => this.onClickTool({ tool: 'TEXT', text: i18n('tool.add_text') })} title={i18n('tool.add_text')} />
+				<ToolButton active={this.state.currentTool === 'IMAGE'} icon="icon-picture" onClick={() => this.onClickTool({ tool: 'IMAGE', text: i18n('tool.add_image') })} title={i18n('tool.add_image')} />
+				<ToolButton active={this.state.currentTool === 'SHAPE'} icon="icon-star-empty" onClick={() => this.onClickTool({ tool: 'SHAPE', text: i18n('tool.add_shape') })} title={i18n('tool.add_shape')} />
+			</section>
+		);
+	}
+}

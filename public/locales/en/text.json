@@ -1,0 +1,11 @@
+{
+	"common": {
+		"wip": "Work in Progress"
+	},
+	"tool": {
+		"add_text": "Add Text",
+		"add_image": "Add Image",
+		"add_shape": "Add Shape",
+		"insert_text": "Insert Text Here"
+	}
+}
