@@ -8,6 +8,7 @@
     "node-sass": "^4.11.0",
     "react": "^16.8.6",
     "react-color": "^2.17.1",
+    "react-div-100vh": "^0.3.2",
     "react-dom": "^16.8.6",
     "react-scripts": "3.0.0",
     "whevent": "^2.0.4"

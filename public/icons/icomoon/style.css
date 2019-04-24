@@ -1,10 +1,10 @@
 @font-face {
   font-family: 'icomoon';
-  src:  url('fonts/icomoon.eot?c5p0js');
-  src:  url('fonts/icomoon.eot?c5p0js#iefix') format('embedded-opentype'),
-    url('fonts/icomoon.ttf?c5p0js') format('truetype'),
-    url('fonts/icomoon.woff?c5p0js') format('woff'),
-    url('fonts/icomoon.svg?c5p0js#icomoon') format('svg');
+  src:  url('fonts/icomoon.eot?88vuzv');
+  src:  url('fonts/icomoon.eot?88vuzv#iefix') format('embedded-opentype'),
+    url('fonts/icomoon.ttf?88vuzv') format('truetype'),
+    url('fonts/icomoon.woff?88vuzv') format('woff'),
+    url('fonts/icomoon.svg?88vuzv#icomoon') format('svg');
   font-weight: normal;
   font-style: normal;
 }
@@ -24,6 +24,27 @@
   -moz-osx-font-smoothing: grayscale;
 }
 
+.icon-paint-format:before {
+  content: "\e904";
+}
+.icon-bin:before {
+  content: "\e903";
+}
+.icon-trashcan:before {
+  content: "\e903";
+}
+.icon-remove:before {
+  content: "\e903";
+}
+.icon-delete:before {
+  content: "\e903";
+}
+.icon-recycle:before {
+  content: "\e903";
+}
+.icon-dispose:before {
+  content: "\e903";
+}
 .icon-star-empty:before {
   content: "\e902";
 }

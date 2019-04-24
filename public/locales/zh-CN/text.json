@@ -5,6 +5,7 @@
 	"tool": {
 		"add_text": "插入文字",
 		"add_image": "插入图片",
+		"delete": "删除",
 		"background_color": "设置背景色",
 		"insert_text": "请插入文字"
 	}

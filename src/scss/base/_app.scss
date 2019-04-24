@@ -3,14 +3,14 @@
 	overflow: hidden;
 
 	.app {
-		display: flex;
-		flex-direction: column;
 		width: 100%;
 		height: 100vh;
 
 		.canvas {
-			display: block;
-			flex: 1 1 auto;
+			position: absolute;
+			width: 100%;
+			top: 0;
+			height: calc(100% - 10rem);
 			display: flex;
 			justify-content: center;
 			align-items: flex-start;
@@ -30,8 +30,7 @@
 				z-index: 2;
 				position: absolute;
 				right: 2rem;
-				bottom: 0;
-				transform: translateY(-50%);
+				bottom: 2rem;
 			}
 			.item {
 				position: absolute;
@@ -59,7 +58,11 @@
 		}
 
 		.toolbar {
-			flex: 0 1 auto;
+			position: absolute;
+			width: 100%;
+			bottom: 0;
+			height: 10rem;
+
 			padding: 1rem 0;
 			z-index: 1;
 
@@ -101,10 +104,11 @@
 
 		.text{
 			background-color: rgba(0,0,0,.5);
-			font-size: 5rem;
+			font-size: 4rem;
 			color: #fff;
 			padding: 2rem 5rem;
 			border-radius: 2rem;
+			white-space: nowrap;
 		}
 		opacity: 0;
 	}

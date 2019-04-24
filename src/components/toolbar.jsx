@@ -31,7 +31,8 @@ export default class Toolbar extends Component {
 			<section className="toolbar">
 				<ToolButton active={this.state.currentTool === 'TEXT'} icon="icon-text-color" onClick={() => this.onClickTool({ tool: 'TEXT', text: i18n('tool.add_text') })} title={i18n('tool.add_text')} />
 				<ToolButton active={this.state.currentTool === 'IMAGE'} icon="icon-picture" onClick={() => this.onClickTool({ tool: 'IMAGE', text: i18n('tool.add_image') })} title={i18n('tool.add_image')} />
-				<ToolButton active={this.state.currentTool === 'BACKGROUND'} icon="icon-star-empty" onClick={() => this.onClickTool({ tool: 'BACKGROUND', text: i18n('tool.background_color') })} title={i18n('tool.background_color')} />
+				<ToolButton active={this.state.currentTool === 'BACKGROUND'} icon="icon-paint-format" onClick={() => this.onClickTool({ tool: 'BACKGROUND', text: i18n('tool.background_color') })} title={i18n('tool.background_color')} />
+				<ToolButton active={this.state.currentTool === 'DELETE'} icon="icon-bin" onClick={() => this.onClickTool({ tool: 'DELETE', text: i18n('tool.delete') })} title={i18n('tool.delete')} />
 			</section>
 		);
 	}

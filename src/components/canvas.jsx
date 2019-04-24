@@ -38,9 +38,27 @@ export default class Canvas extends Component {
 		}
 		this.setState({ items, background });
 		this.canvas = React.createRef;
-		whevent.bind('TOOL', ({ tool }) => {
-			this.setState({ showBackgroundColorPicker: tool === 'BACKGROUND' });
-		}, this);
+		whevent.bind('TOOL', this.onSelectTool, this);
+	}
+
+	onSelectTool({ tool }) {
+		let showBackgroundColorPicker = tool === 'BACKGROUND';
+		if (tool === 'DELETE') {
+			if (this.state.selecting) {
+				this.setState({ items: this.state.items.filter(i => i !== this.state.selecting) });
+				this.saveWork();
+			}
+			whevent.call('SELECT_TOOL', { tool: null });
+		}
+		this.setState({ showBackgroundColorPicker });
+	}
+
+	saveWork() {
+		setTimeout(() => {
+			localStorage.setItem('canvas', JSON.stringify(this.state.items));
+			localStorage.setItem('background', this.state.background);
+		}, 50);
+
 	}
 
 	onSaveContent = ({ currentTarget }) => {
@@ -49,10 +67,11 @@ export default class Canvas extends Component {
 		if (item) {
 			item.content = currentTarget.innerHTML;
 			if (item.content === null || item.content.trim() === '') {
-				this.setState({ items: this.state.items.filter(i => i !== item) }, localStorage.setItem('canvas', JSON.stringify(this.state.items)));
+				this.setState({ items: this.state.items.filter(i => i !== item) });
 			} else {
-				this.setState({ items: [...this.state.items] }, localStorage.setItem('canvas', JSON.stringify(this.state.items)));
+				this.setState({ items: [...this.state.items] });
 			}
+			this.saveWork();
 		}
 	}
 
@@ -72,8 +91,8 @@ export default class Canvas extends Component {
 			}
 		}
 
-		if(globalState.currentTool === 'BACKGROUND'){
-			whevent.call('SELECT_TOOL', {tool: null});
+		if (globalState.currentTool === 'BACKGROUND') {
+			whevent.call('SELECT_TOOL', { tool: null });
 		}
 	}
 
@@ -100,7 +119,8 @@ export default class Canvas extends Component {
 		if (this.state.dragging) {
 			this.state.dragging.x += movementX;
 			this.state.dragging.y += movementY;
-			this.setState({ items: [...this.state.items] })
+			this.setState({ items: [...this.state.items] });
+			this.saveWork();
 		}
 	}
 
@@ -110,37 +130,41 @@ export default class Canvas extends Component {
 	}
 
 	onClickBlank = e => {
-		if (globalState.currentTool) {
+		if (globalState.currentTool === 'TEXT') {
 			let { clientX: rawX, clientY: rawY } = e;
 			if (globalState.currentTool === 'TEXT') {
 				const item = { type: 'text', content: i18n('tool.insert_text'), color: '#37f', id: ++UUID, scale: 3, rotation: 0, x: rawX - e.currentTarget.clientWidth * 0.5, y: rawY };
 				whevent.call('SELECT_TOOL', { tool: null });
-				this.setState({ selecting: item, items: [...this.state.items, item] }, localStorage.setItem('canvas', JSON.stringify(this.state.items)));
+				this.setState({ selecting: item, items: [...this.state.items, item] });
+				this.saveWork();
 			}
 		} else {
 			this.setState({ selecting: null });
 		}
 
-		if(globalState.currentTool === 'BACKGROUND'){
-			whevent.call('SELECT_TOOL', {tool: null});
+		if (globalState.currentTool === 'BACKGROUND') {
+			whevent.call('SELECT_TOOL', { tool: null });
 		}
 	}
 
 	onChangeColor = e => {
 		if (this.state.selecting) {
 			this.state.selecting.color = e.hex;
-			this.setState({ items: [...this.state.items] }, localStorage.setItem('canvas', JSON.stringify(this.state.items)));
+			this.setState({ items: [...this.state.items] });
+			this.saveWork();
 		}
 	}
 
 	onChangeBackgroundColor = e => {
-		this.setState({ background: e.hex }, localStorage.setItem('background', e.hex));
+		this.setState({ background: e.hex });
+		this.saveWork();
 	}
 
 	onChangeSize = e => {
 		if (this.state.selecting) {
 			this.state.selecting.scale = e.target.value;
-			this.setState({ items: [...this.state.items] }, localStorage.setItem('canvas', JSON.stringify(this.state.items)));
+			this.setState({ items: [...this.state.items] });
+			this.saveWork();
 		}
 	}
 
