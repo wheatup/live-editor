@@ -5,7 +5,7 @@
 	"tool": {
 		"add_text": "Add Text",
 		"add_image": "Add Image",
-		"add_shape": "Add Shape",
+		"background_color": "Set Background Color",
 		"insert_text": "Insert Text Here"
 	}
 }

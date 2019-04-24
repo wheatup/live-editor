@@ -15,6 +15,24 @@
 			justify-content: center;
 			align-items: flex-start;
 			overflow: hidden;
+			&--background{
+				position: absolute;
+				top: 0;
+				left: 0;
+				width: 100%;
+				height: 100%;
+				background-color: #fff;
+			}
+			.color-picker-container{
+				z-index: 2;
+			}
+			.color-picker-background-container{
+				z-index: 2;
+				position: absolute;
+				right: 2rem;
+				bottom: 0;
+				transform: translateY(-50%);
+			}
 			.item {
 				position: absolute;
 				flex: 0;
@@ -25,6 +43,18 @@
 					outline: dashed 1px rgba(0,0,0,.2);
 					outline-offset: 1px;
 				}
+			}
+			.item-panel {
+				width: 100%;
+				display: flex;
+				justify-content: center;
+				align-items: center;
+				background-color: #fff;
+				margin: 0.5rem 0;
+				padding: 1rem 0;
+				box-shadow: 0px 0px 3px 2px rgba(0,0,0,.1);
+				border-radius: 2px;
+				border: solid 1px rgba(0,0,0,.2);
 			}
 		}
 
@@ -67,6 +97,7 @@
 		display: flex;
 		justify-content: center;
 		align-items: center;
+		z-index: 100;
 
 		.text{
 			background-color: rgba(0,0,0,.5);
