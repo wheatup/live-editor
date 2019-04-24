@@ -168,13 +168,21 @@ export default class Canvas extends Component {
 		}
 	}
 
+	onChangeRotation = e => {
+		if (this.state.selecting) {
+			this.state.selecting.rotation = e.target.value;
+			this.setState({ items: [...this.state.items] });
+			this.saveWork();
+		}
+	}
+
 	render() {
 		const { selecting } = this.state;
 		return (
 			<section onMouseUp={this.onMouseUp} onTouchEnd={this.onMouseUp} onMouseMove={this.onMouseMove} onTouchMove={this.onMouseMove} className="canvas">
 				<div onClick={this.onClickBlank} className="canvas--background" style={{ backgroundColor: this.state.background }}></div>
 				{this.state.items.map((item, index) => {
-					const { type, content, color, id, scale, x, y, ...rest } = item;
+					const { type, content, color, id, scale, x, y, rotation, ...rest } = item;
 					switch (type) {
 						case 'text':
 							return <React.Fragment>
@@ -189,7 +197,7 @@ export default class Canvas extends Component {
 
 									contentEditable={selecting === item}
 									style={{
-										transform: `translate(${x}px, ${y}px) scale(${scale})`,
+										transform: `translate(${x}px, ${y}px) scale(${scale}) rotate(${rotation}deg)`,
 										color
 									}}
 									{...rest}
@@ -200,7 +208,7 @@ export default class Canvas extends Component {
 									className="color-picker-container"
 									style={{ transform: `translate(${x}px, calc(${y > window.innerHeight / 2 ? '-100%' : '0%'} + ${y + (y > window.innerHeight / 2 ? -10 : 15) * item.scale}px))` }}>
 									<SliderPicker color={item.color} onChangeComplete={this.onChangeColor} />
-									<ItemPanel item={item} onChangeSize={this.onChangeSize} />
+									<ItemPanel rotation={item.rotation} onChangeRotation={this.onChangeRotation} item={item} onChangeSize={this.onChangeSize} />
 								</div>}
 							</React.Fragment>;
 					}
